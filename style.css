@@ -1,0 +1,492 @@
+/* ===========================
+   Phomar Systems
+   style.css
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#ffffff;
+    color:#222;
+    overflow-x:hidden;
+    line-height:1.7;
+}
+
+/* ===========================
+        Navbar
+=========================== */
+
+.navbar{
+    background:#002b5c !important;
+    padding:15px 0;
+    transition:.4s;
+}
+
+.navbar-brand{
+    font-size:28px;
+    font-weight:bold;
+    color:#fff !important;
+}
+
+.navbar-nav li{
+    margin-left:18px;
+}
+
+.navbar-nav a{
+    color:white !important;
+    text-decoration:none;
+    font-weight:500;
+    transition:.3s;
+}
+
+.navbar-nav a:hover{
+    color:#00d4ff !important;
+}
+
+/* ===========================
+          Hero
+=========================== */
+
+.hero{
+    min-height:100vh;
+    background:linear-gradient(rgba(0,30,70,.80),
+    rgba(0,20,60,.85)),
+    url("../images/hero-bg.jpg");
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    align-items:center;
+    color:white;
+    padding-top:90px;
+}
+
+.hero h1{
+    font-size:55px;
+    font-weight:bold;
+    margin-bottom:25px;
+}
+
+.hero p{
+    font-size:20px;
+    margin-bottom:35px;
+}
+
+.hero .btn{
+    padding:14px 30px;
+    border-radius:30px;
+    margin-right:15px;
+    font-weight:600;
+}
+
+.btn-primary{
+    background:#007bff;
+    border:none;
+}
+
+.btn-primary:hover{
+    background:#0056b3;
+}
+
+.btn-outline-light:hover{
+    color:#000;
+}
+
+/* ===========================
+      Section Common
+=========================== */
+
+section{
+    padding:90px 0;
+}
+
+section h2{
+    font-size:40px;
+    font-weight:bold;
+    color:#002b5c;
+    margin-bottom:20px;
+}
+
+section p{
+    color:#555;
+}
+
+/* ===========================
+     Why Choose Us
+=========================== */
+
+#why{
+    background:#f8f9fa;
+}
+
+#why .card{
+    border:none;
+    border-radius:15px;
+    text-align:center;
+    padding:35px;
+    transition:.4s;
+}
+
+#why .card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 15px 40px rgba(0,0,0,.15);
+
+}
+
+#why i{
+
+    font-size:55px;
+
+    color:#007bff;
+
+    margin-bottom:20px;
+
+}
+
+/* ===========================
+        Statistics
+=========================== */
+
+#counter{
+
+    background:#002b5c;
+
+    color:white;
+
+}
+
+#counter h2{
+
+    color:white;
+
+    font-size:50px;
+
+}
+
+#counter p{
+
+    color:white;
+
+}
+
+/* ===========================
+        Services
+=========================== */
+
+#services .card{
+
+    border:none;
+
+    padding:30px;
+
+    transition:.4s;
+
+    border-radius:15px;
+
+}
+
+#services .card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.12);
+
+}
+
+#services h4{
+
+    color:#002b5c;
+
+    margin-bottom:15px;
+
+}
+
+/* ===========================
+       Solutions
+=========================== */
+
+#solutions{
+
+    background:#f7f8fc;
+
+}
+
+#solutions .card{
+
+    border:none;
+
+    transition:.4s;
+
+    border-radius:15px;
+
+}
+
+#solutions .card:hover{
+
+    transform:scale(1.04);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.12);
+
+}
+
+/* ===========================
+       Industries
+=========================== */
+
+#industries .card{
+
+    border:none;
+
+    transition:.4s;
+
+    padding:25px;
+
+}
+
+#industries .card:hover{
+
+    background:#002b5c;
+
+    color:white;
+
+    transform:translateY(-8px);
+
+}
+
+#industries .card:hover i{
+
+    color:#00d4ff;
+
+}
+
+/* ===========================
+        Projects
+=========================== */
+
+#projects .card{
+
+    overflow:hidden;
+
+    border:none;
+
+    border-radius:15px;
+
+    transition:.4s;
+
+}
+
+#projects .card img{
+
+    height:230px;
+
+    object-fit:cover;
+
+}
+
+#projects .card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 15px 40px rgba(0,0,0,.2);
+
+}
+
+/* ===========================
+      Testimonials
+=========================== */
+
+.testimonial{
+
+    background:#0b3d91;
+
+    color:white;
+
+}
+
+.testimonial h2{
+
+    color:white;
+
+}
+
+/* ===========================
+          Blog
+=========================== */
+
+#blog .card{
+
+    border:none;
+
+    transition:.3s;
+
+}
+
+#blog .card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+/* ===========================
+      Contact Banner
+=========================== */
+
+.contact-banner{
+
+    background:#001a38;
+
+    color:white;
+
+}
+
+.contact-banner h2{
+
+    color:white;
+
+}
+
+/* ===========================
+         Footer
+=========================== */
+
+footer{
+
+    background:#001122;
+
+    color:#ddd;
+
+}
+
+footer h3,
+footer h5{
+
+    color:white;
+
+}
+
+footer ul{
+
+    list-style:none;
+
+    padding:0;
+
+}
+
+footer ul li{
+
+    margin-bottom:10px;
+
+}
+
+footer a{
+
+    color:#ddd;
+
+    text-decoration:none;
+
+}
+
+footer a:hover{
+
+    color:#00d4ff;
+
+}
+
+footer i{
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+footer i:hover{
+
+    color:#00d4ff;
+
+}
+
+/* ===========================
+       Responsive
+=========================== */
+
+@media(max-width:992px){
+
+.hero h1{
+
+font-size:40px;
+
+}
+
+section h2{
+
+font-size:32px;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.hero{
+
+text-align:center;
+
+}
+
+.hero h1{
+
+font-size:32px;
+
+}
+
+.hero p{
+
+font-size:17px;
+
+}
+
+.navbar-nav{
+
+text-align:center;
+
+}
+
+section{
+
+padding:70px 0;
+
+}
+
+}
+
+@media(max-width:576px){
+
+.hero h1{
+
+font-size:28px;
+
+}
+
+.hero .btn{
+
+display:block;
+
+margin:10px auto;
+
+}
+
+section h2{
+
+font-size:28px;
+
+}
+
+}
