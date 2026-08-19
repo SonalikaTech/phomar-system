@@ -7,6 +7,7 @@
     <title>Phomar Systems | Embedded Engineering Solutions</title>
 
     <link rel="stylesheet" href="style.css">
+    <meta name="theme-color" content="#0f172a">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -20,56 +21,45 @@
 
 <header>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+   
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
 
-<div class="container">
+      <!-- Logo -->
+      <a class="navbar-brand" href="#home">
+        <img src="logo.jpeg" alt="Phomar Logo" class="logo-img">
+      </a>
+      
+      <button class="navbar-toggler" type="button"
+        data-bs-toggle="collapse" data-bs-target="#navbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-<a class="navbar-brand fw-bold" href="#">
-Phomar Systems
-</a>
+      <div class="collapse navbar-collapse" id="navbar">
+        <ul class="navbar-nav ms-auto">
 
-<button class="navbar-toggler" data-bs-toggle="collapse"
-data-bs-target="#navbar">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="#solutions">Solutions</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#careers">Careers</a></li>
+          <li class="nav-item"><a class="nav-link" href="#blog">Blog</a></li>
+          <li class="nav-item"><a href="connect.html" class="btn btn-primary">Connect</a></li>
 
-<span class="navbar-toggler-icon"></span>
-
-</button>
-
-<div class="collapse navbar-collapse" id="navbar">
-
-<ul class="navbar-nav ms-auto">
-
-<li class="nav-item"><a href="#">Home</a></li>
-
-<li class="nav-item"><a href="#">About</a></li>
-
-<li class="nav-item"><a href="#">Services</a></li>
-
-<li class="nav-item"><a href="#">Solutions</a></li>
-
-<li class="nav-item"><a href="#">Industries</a></li>
-
-<li class="nav-item"><a href="#">Projects</a></li>
-
-<li class="nav-item"><a href="#">Careers</a></li>
-
-<li class="nav-item"><a href="#">Blog</a></li>
-
-<li class="nav-item"><a href="#">Contact</a></li>
-
-</ul>
-
-</div>
-
-</div>
-
-</nav>
-
+        </ul>
+      </div>
+     
+      
+    </div>
+  </nav>
 </header>
+
+
 
 <!-- ================= HERO ================= -->
 
-<section class="hero">
+<section id="home" class="hero">
 
 <div class="container">
 
@@ -108,7 +98,7 @@ Get Quote
 
 <div class="col-lg-6">
 
-<img src="images/hero.png"
+<img src="background.avif"
 class="img-fluid">
 
 </div>
@@ -500,7 +490,7 @@ Our Services
 
 <div class="card">
 
-<img src="images/project1.jpg" class="card-img-top">
+<img src="Best-Smart.jpeg" class="card-img-top">
 
 <div class="card-body">
 
@@ -520,7 +510,7 @@ Our Services
 
 <div class="card">
 
-<img src="images/project2.jpg" class="card-img-top">
+<img src="IoT-control.webp" class="card-img-top">
 
 <div class="card-body">
 
@@ -540,7 +530,7 @@ Our Services
 
 <div class="card">
 
-<img src="images/project3.jpg" class="card-img-top">
+<img src="USB-CAN-B-details-1.jpg" class="card-img-top">
 
 <div class="card-body">
 
@@ -666,8 +656,8 @@ Our Services
 
 <p>Let's discuss your project today.</p>
 
-<button id="contactBtn" class="btn btn-primary">
-    Contact Us
+<button class="btn btn-primary" onclick="window.location.href='connect.html'">
+    Connect
 </button>
 
 </div>
@@ -731,13 +721,13 @@ IoT and Industrial Solutions.
 
 <p>
 
-Email : info@phomar.com
+Email : sonalikashailysn3939@gmail.com.com
 
 </p>
 
 <p>
 
-Phone : +91-9876543210
+Phone : +91 8539860356
 
 </p>
 
@@ -777,6 +767,11 @@ Address : India
 
 <script src="script.js"></script>
 
+<script>
+window.addEventListener("load", () => {
+    document.body.classList.add("loaded");
+});
+</script>
 </body>
 
 </html>
