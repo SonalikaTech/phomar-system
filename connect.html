@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connect With Phomar</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial, Helvetica, sans-serif;
+    }
+
+    body{
+      background:#0f172a;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      min-height:100vh;
+      padding:20px;
+    }
+
+    .form-box{
+      width:100%;
+      max-width:550px;
+      background:#fff;
+      border-radius:15px;
+      padding:35px;
+      box-shadow:0 15px 35px rgba(0,0,0,.25);
+    }
+
+    h2{
+      text-align:center;
+      color:#0f172a;
+      margin-bottom:10px;
+    }
+
+    .subtitle{
+      text-align:center;
+      color:#666;
+      margin-bottom:25px;
+    }
+
+    .input-group{
+      margin-bottom:18px;
+    }
+
+    label{
+      display:block;
+      margin-bottom:8px;
+      font-weight:600;
+      color:#333;
+    }
+
+    input, textarea{
+      width:100%;
+      padding:14px;
+      border:1px solid #ccc;
+      border-radius:8px;
+      outline:none;
+      font-size:15px;
+    }
+
+    input:focus, textarea:focus{
+      border-color:#2563eb;
+      box-shadow:0 0 0 3px rgba(37,99,235,.15);
+    }
+
+    textarea{
+      resize:none;
+      height:120px;
+    }
+
+    button{
+      width:100%;
+      padding:15px;
+      background:#2563eb;
+      color:#fff;
+      border:none;
+      border-radius:8px;
+      font-size:16px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:.3s;
+    }
+
+    button:hover{
+      background:#1d4ed8;
+    }
+
+    #result{
+      margin-top:15px;
+      text-align:center;
+      font-weight:bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-box">
+
+  <h2>Connect With Phomar</h2>
+  <p class="subtitle">Fill your details and we'll contact you soon.</p>
+
+  <form id="contactForm">
+
+    <div class="input-group">
+      <label>Full Name</label>
+      <input type="text" name="from_name" placeholder="Enter your name" required>
+    </div>
+
+    <div class="input-group">
+      <label>Email</label>
+      <input type="email" name="from_email" placeholder="Enter your email" required>
+    </div>
+
+    <div class="input-group">
+      <label>Phone Number</label>
+      <input type="tel" name="phone" placeholder="Enter your phone number" required>
+    </div>
+
+    <div class="input-group">
+      <label>Message</label>
+      <textarea name="message" placeholder="Write your message..." required></textarea>
+    </div>
+
+    <button type="submit">Send</button>
+
+    <p id="result"></p>
+
+  </form>
+
+</div>
+
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+emailjs.init({ publicKey: "6xIMLcJyjuK8KxklS" });
+
+const form = document.getElementById("contactForm");
+const result = document.getElementById("result");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  try {
+    await emailjs.sendForm(
+      "service_jzj9hnm",
+      "template_7pb7hsq",
+      form
+    );
+
+    result.innerHTML = "✅ Message sent successfully!";
+    result.style.color = "green";
+    form.reset();
+
+  } catch (err) {
+    console.log(err);
+    result.innerHTML = "❌ " + (err.text || JSON.stringify(err));
+    result.style.color = "red";
+  }
+});
+</script>
+
+
+
+</body>
+</html>
