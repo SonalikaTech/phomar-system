@@ -3,6 +3,7 @@
    style.css
 =========================== */
 
+
 *{
     margin:0;
     padding:0;
@@ -17,6 +18,26 @@ body{
     overflow-x:hidden;
     line-height:1.7;
 }
+
+
+html, body{
+    margin:0;
+    padding:0;
+    width:100%;
+    min-height:100%;
+    background:#0f172a;
+    overflow-x:hidden;
+}
+
+body{
+    opacity:0;
+    transition:opacity .3s ease;
+}
+
+body.loaded{
+    opacity:1;
+}
+
 
 /* ===========================
         Navbar
@@ -49,9 +70,41 @@ body{
     color:#00d4ff !important;
 }
 
+
+
+/* Smooth scrolling */
+html{
+    scroll-behavior: smooth;
+}
+
+/* Fixed navbar ke niche section hide na ho */
+section{
+    scroll-margin-top: 80px;
+}
+
+/* Logo */
+.logo-img{
+    height: 65px;
+    width: auto;
+}
+
+/* Navbar links */
+.navbar-nav .nav-link{
+    color: white;
+    font-weight: 500;
+    margin-left: 12px;
+    transition: 0.3s;
+}
+
+.navbar-nav .nav-link:hover{
+    color: #00d4ff;
+}
+
+
 /* ===========================
           Hero
 =========================== */
+
 
 .hero{
     min-height:100vh;
@@ -64,6 +117,8 @@ body{
     align-items:center;
     color:white;
     padding-top:90px;
+
+    
 }
 
 .hero h1{
