@@ -191,19 +191,6 @@ window.addEventListener("scroll",()=>{
 
 
 // ===============================
-// Default Hidden
-// ===============================
-
-reveal.forEach(section=>{
-
-    section.style.opacity="0";
-
-    section.style.transform="translateY(60px)";
-
-});
-
-
-// ===============================
 // Active Navbar Link
 // ===============================
 
@@ -224,6 +211,88 @@ navLinks.forEach(link=>{
     });
 
 });
+
+const quoteButton=document.getElementById("quoteButton");
+const quoteMessage=document.getElementById("quoteMessage");
+
+if(quoteButton && quoteMessage){
+
+    quoteButton.addEventListener("click",()=>{
+
+        const isOpen=!quoteMessage.hidden;
+
+        quoteMessage.hidden=isOpen;
+        quoteButton.setAttribute("aria-expanded",String(!isOpen));
+        quoteButton.textContent=isOpen ? "Get Quote" : "Hide Quote";
+
+    });
+
+}
+
+const aiAssistantToggle=document.getElementById("aiAssistantToggle");
+const aiAssistantPanel=document.getElementById("aiAssistantPanel");
+const aiAssistantClose=document.getElementById("aiAssistantClose");
+const aiAssistantForm=document.getElementById("aiAssistantForm");
+const aiAssistantInput=document.getElementById("aiAssistantInput");
+const aiAssistantMessages=document.getElementById("aiAssistantMessages");
+
+const addAssistantMessage=(message,type)=>{
+    const element=document.createElement("div");
+    element.className=`ai-message ai-message-${type}`;
+    element.textContent=message;
+    aiAssistantMessages.appendChild(element);
+    aiAssistantMessages.scrollTop=aiAssistantMessages.scrollHeight;
+    return element;
+};
+
+if(aiAssistantToggle && aiAssistantPanel && aiAssistantClose){
+
+    const setAssistantOpen=(isOpen)=>{
+        aiAssistantPanel.hidden=!isOpen;
+        aiAssistantToggle.setAttribute("aria-expanded",String(isOpen));
+    };
+
+    aiAssistantToggle.addEventListener("click",()=>setAssistantOpen(aiAssistantPanel.hidden));
+    aiAssistantClose.addEventListener("click",()=>setAssistantOpen(false));
+
+}
+
+if(aiAssistantForm && aiAssistantInput && aiAssistantMessages){
+
+    aiAssistantForm.addEventListener("submit",async(event)=>{
+        event.preventDefault();
+        const question=aiAssistantInput.value.trim();
+
+        if(!question){
+            return;
+        }
+
+        addAssistantMessage(question,"user");
+        aiAssistantInput.value="";
+        const loadingMessage=addAssistantMessage("Thinking...","bot");
+
+        try{
+            const response=await fetch("/api/chat",{
+                method:"POST",
+                headers:{"Content-Type":"application/json"},
+                body:JSON.stringify({message:question})
+            });
+            const data=await response.json();
+
+            if(!response.ok){
+                throw new Error(data.error || "Assistant request failed");
+            }
+
+            loadingMessage.textContent=data.reply;
+        }
+        catch(error){
+            loadingMessage.textContent="AI assistant is unavailable right now. Please try again or use Connect.";
+            console.error(error);
+        }
+
+    });
+
+}
 
 
 // ===============================
@@ -295,10 +364,11 @@ loader.style.display="none";
 // ===============================
 
 console.log("Phomar Systems Website Loaded Successfully");
+const contactButton=document.getElementById("contactBtn");
 
+if(contactButton){
 
-
-document.getElementById("contactBtn").addEventListener("click", function () {
+contactButton.addEventListener("click", function () {
 
     window.open(
         "https://forms.gle/XXXXXXXXXXXX",
@@ -306,3 +376,5 @@ document.getElementById("contactBtn").addEventListener("click", function () {
     );
 
 });
+
+}
