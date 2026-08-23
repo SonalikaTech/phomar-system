@@ -6,8 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phomar Systems | Embedded Engineering Solutions</title>
 
+    <link rel="icon" type="image/png" href="logo1.png">
+    <link rel="preload" as="image" href="background.avif">
     <link rel="stylesheet" href="style.css">
     <meta name="theme-color" content="#0f172a">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Orbitron:wght@700&display=swap" rel="stylesheet">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -22,12 +28,16 @@
 <header>
 
    
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
     <div class="container">
 
       <!-- Logo -->
       <a class="navbar-brand" href="#home">
-        <img src="logo.jpeg" alt="Phomar Logo" class="logo-img">
+        <img src="logo1.png" alt="Phomar Logo" class="logo-img">
+        <span class="brand-name">
+          <span class="brand-phomar">PHOMAR</span>
+          <span class="brand-system-row"><span class="brand-system">SYSTEMS</span></span>
+        </span>
       </a>
       
       <button class="navbar-toggler" type="button"
@@ -44,8 +54,26 @@
           <li class="nav-item"><a class="nav-link" href="#solutions">Solutions</a></li>
           <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
           <li class="nav-item"><a class="nav-link" href="#careers">Careers</a></li>
-          <li class="nav-item"><a class="nav-link" href="#blog">Blog</a></li>
-          <li class="nav-item"><a href="connect.html" class="btn btn-primary">Connect</a></li>
+          <li class="nav-item"><a href="connect.html" class="nav-link">Connect</a></li>
+
+
+          <!-- Tools Button Dropdown -->
+      <li class="nav-item dropdown">
+        <button class="nav-link dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false">
+            <i class="fa-solid fa-screwdriver-wrench me-1"></i> Tools
+         </button>
+
+        <ul class="dropdown-menu dropdown-menu-end">
+           <li>
+              <a class="dropdown-item text-black" href="bits_convertorbyphomar.html">
+                 Bits Converter
+              </a>
+           </li>
+         </ul>
+     </li>
 
         </ul>
       </div>
@@ -63,6 +91,7 @@
 
 <div class="container">
 
+
 <div class="row align-items-center">
 
 <div class="col-lg-6">
@@ -72,34 +101,126 @@ Embedded Systems &
 Engineering Solutions
 </h1>
 
-<p>
+<div class="hero-features" aria-label="Our embedded engineering services">
+<span>Firmware Development</span>
+<span>PCB Design</span>
+<span>Embedded Linux</span>
+<span>IoT Solutions</span>
+<span>Automotive Electronics</span>
+</div>
 
-Firmware Development
+<a href="connect.html" class="btn btn-primary">Contact Us</a>
 
-PCB Design
 
-Embedded Linux
 
-IoT Solutions
-
-Automotive Electronics
-
-</p>
-
-<a href="#" class="btn btn-primary">
-Contact Us
-</a>
-
-<a href="#" class="btn btn-outline-light">
-Get Quote
-</a>
 
 </div>
 
 <div class="col-lg-6">
 
-<img src="background.avif"
-class="img-fluid">
+<div id="projectCarousel" class="carousel slide hero-carousel" data-bs-ride="carousel">
+
+<div class="carousel-indicators">
+<button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Image 1"></button>
+<button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="1" aria-label="Image 2"></button>
+<button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="2" aria-label="Image 3"></button>
+<button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="3" aria-label="Image 4"></button>
+<button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="4" aria-label="Image 5"></button>
+</div>
+
+<div class="carousel-inner">
+
+<div class="carousel-item active">
+<img src="image1.jpg" class="d-block w-100" alt="Embedded project image 1">
+<div class="carousel-caption">
+<h3>Embedded Project 1</h3>
+</div>
+</div>
+
+<div class="carousel-item">
+<img src="image2.jpg" class="d-block w-100" alt="Embedded project image 2">
+<div class="carousel-caption">
+<h3>Embedded Project 2</h3>
+</div>
+</div>
+
+<div class="carousel-item">
+<img src="image3.png" class="d-block w-100" alt="Embedded project image 3">
+<div class="carousel-caption">
+<h3>Embedded Project 3</h3>
+</div>
+</div>
+
+<div class="carousel-item">
+<img src="image4.webp" class="d-block w-100" alt="Embedded project image 4">
+<div class="carousel-caption">
+<h3>Embedded Project 4</h3>
+</div>
+</div>
+
+<div class="carousel-item">
+<img src="image5.jpg" class="d-block w-100" alt="Embedded project image 5">
+<div class="carousel-caption">
+<h3>Embedded Project 5</h3>
+</div>
+</div>
+
+</div>
+
+<button class="carousel-control-prev" type="button" data-bs-target="#projectCarousel" data-bs-slide="prev" aria-label="Previous image">
+<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+</button>
+<button class="carousel-control-next" type="button" data-bs-target="#projectCarousel" data-bs-slide="next" aria-label="Next image">
+<span class="carousel-control-next-icon" aria-hidden="true"></span>
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= ABOUT ================= -->
+
+<section id="about">
+
+<div class="container">
+
+<div class="row align-items-center g-2">
+
+<div class="col-lg-6">
+
+<span class="about-eyebrow">ABOUT PHOMAR SYSTEM</span>
+<h2>Engineering ideas into dependable products.</h2>
+<p class="about-lead">Phomar System helps businesses turn complex electronics concepts into reliable, production-ready solutions.</p>
+<p>From firmware and PCB design to embedded Linux, IoT and automotive electronics, our team supports every stage from initial architecture to final implementation.</p>
+
+</div>
+
+<div class="col-lg-6">
+
+<div class="about-capabilities">
+<div class="about-capability">
+<i class="fa-solid fa-microchip" aria-hidden="true"></i>
+<div><h4>Embedded Expertise</h4><p>Efficient firmware and hardware integration.</p></div>
+</div>
+<div class="about-capability">
+<i class="fa-solid fa-diagram-project" aria-hidden="true"></i>
+<div><h4>End-to-End Thinking</h4><p>Clear engineering from concept to production.</p></div>
+</div>
+<div class="about-capability">
+<i class="fa-solid fa-car" aria-hidden="true"></i>
+<div><h4>Industry Focus</h4><p>Solutions built for automotive and industrial needs.</p></div>
+</div>
+<div class="about-capability">
+<i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+<div><h4>Built for Reliability</h4><p>Stable, maintainable and scalable systems.</p></div>
+</div>
+</div>
 
 </div>
 
@@ -552,121 +673,9 @@ Our Services
 
 </section>
 
-<!-- ================= TESTIMONIAL ================= -->
-
-<section class="bg-primary text-white py-5">
-
-<div class="container text-center">
-
-<h2>What Our Clients Say</h2>
-
-<p class="lead">
-
-"Phomar Systems delivered an outstanding embedded solution for our automotive products."
-
-</p>
-
-<h5>- Automotive Client</h5>
-
-</div>
-
-</section>
-
-<!-- ================= BLOG ================= -->
-
-<section id="blog" class="py-5">
-
-<div class="container">
-
-<div class="text-center mb-5">
-
-<h2>Latest Blogs</h2>
-
-</div>
-
-<div class="row">
-
-<div class="col-md-4">
-
-<div class="card">
-
-<div class="card-body">
-
-<h4>Getting Started with STM32</h4>
-
-<p>Learn Embedded Development Basics...</p>
-
-<a href="#">Read More</a>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="col-md-4">
-
-<div class="card">
-
-<div class="card-body">
-
-<h4>PCB Design Tips</h4>
-
-<p>Professional PCB Design Guidelines...</p>
-
-<a href="#">Read More</a>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="col-md-4">
-
-<div class="card">
-
-<div class="card-body">
-
-<h4>Future of Automotive Electronics</h4>
-
-<p>ADAS, EV and Smart Vehicles...</p>
-
-<a href="#">Read More</a>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ================= CONTACT CTA ================= -->
-
-<section class="bg-dark text-white py-5">
-
-<div class="container text-center">
-
-<h2>Ready To Build Your Next Embedded Product?</h2>
-
-<p>Let's discuss your project today.</p>
-
-<button class="btn btn-primary" onclick="window.location.href='connect.html'">
-    Connect
-</button>
-
-</div>
-
-</section>
-
 <!-- ================= FOOTER ================= -->
 
-<footer class="bg-black text-white pt-5">
+<footer class="text-white pt-3">
 
 <div class="container">
 
@@ -675,13 +684,6 @@ Our Services
 <div class="col-lg-4">
 
 <h3>Phomar Systems</h3>
-
-<p>
-
-Embedded Engineering Company providing Automotive,
-IoT and Industrial Solutions.
-
-</p>
 
 </div>
 
@@ -721,19 +723,13 @@ IoT and Industrial Solutions.
 
 <p>
 
-Email : sonalikashailysn3939@gmail.com.com
+Email : contactphomar@zohomail.in
 
 </p>
 
 <p>
 
 Phone : +91 8539860356
-
-</p>
-
-<p>
-
-Address : India
 
 </p>
 
@@ -765,13 +761,37 @@ Address : India
 
 </footer>
 
+<button id="aiAssistantToggle" class="ai-assistant-toggle" type="button" aria-controls="aiAssistantPanel" aria-expanded="false" aria-label="Open AI assistant">
+  <i class="fa-solid fa-robot" aria-hidden="true"></i>
+</button>
+
+<aside id="aiAssistantPanel" class="ai-assistant-panel" hidden>
+  <div class="ai-assistant-header">
+    <div>
+      <strong>Phomar AI Assistant</strong>
+      <span>Ask about our embedded solutions</span>
+    </div>
+    <button id="aiAssistantClose" type="button" aria-label="Close AI assistant">&times;</button>
+  </div>
+  <div id="aiAssistantMessages" class="ai-assistant-messages" aria-live="polite">
+    <div class="ai-message ai-message-bot">Hi! Ask me about firmware, PCB design, IoT, or automotive electronics.</div>
+  </div>
+  <form id="aiAssistantForm" class="ai-assistant-form">
+    <input id="aiAssistantInput" type="text" placeholder="Type your question..." autocomplete="off" required>
+    <button type="submit" aria-label="Send message"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i></button>
+  </form>
+</aside>
+
 <script src="script.js"></script>
 
-<script>
+<!-- <script>
 window.addEventListener("load", () => {
     document.body.classList.add("loaded");
 });
-</script>
+</script> -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>
