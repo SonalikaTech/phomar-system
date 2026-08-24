@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Inductance Calculator – Turns, AL Value & Inductance | Phomar Systems</title>
+<meta name="description" content="Free online inductance calculator by Phomar Systems. Calculate coil turns, AL value, and inductance using L = AL × N². Supports nH, µH and mH.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Phomar Systems">
+<meta name="theme-color" content="#06243a">
+
+<meta property="og:title" content="Inductance Calculator – Phomar Systems">
+<meta property="og:description" content="Calculate inductance, AL value and number of turns for magnetic cores with this free online calculator.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Phomar Systems">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Inductance Calculator",
+  "description": "Online calculator for calculating inductance, AL value and number of turns of an inductor or magnetic core.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "author": {
+    "@type": "Organization",
+    "name": "Phomar Systems",
+    "url": "https://phomar.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Phomar Systems",
+    "url": "https://phomar.com/"
+  }
+}
+</script>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f7fa;color:#17212b;
+    min-height:100vh
+}
+.hero{
+    height:125px;padding:15px 20px;
+    display:flex;align-items:center;justify-content:center;
+    text-align:center;position:relative;overflow:hidden;
+    background:
+      linear-gradient(rgba(4,24,40,.78),rgba(4,24,40,.82)),
+      radial-gradient(circle at 20% 30%,#087ea4 0,transparent 35%),
+      radial-gradient(circle at 80% 60%,#005c7a 0,transparent 38%),#061a29
+}
+.hero:before{
+    content:"";position:absolute;inset:-50%;
+    background:repeating-radial-gradient(ellipse at center,
+      transparent 0 48px,rgba(49,169,210,.13) 49px 50px,
+      transparent 51px 82px);
+    transform:rotate(-10deg)
+}
+.hero h1{
+    position:relative;z-index:1;color:#fff;
+    font-size:clamp(27px,4vw,38px);
+    letter-spacing:1px;font-weight:700
+}
+.container{max-width:1200px;margin:auto;padding:16px 18px 28px}
+.intro{text-align:center;margin-bottom:14px;color:#52606d;font-size:14px}
+.calculator-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:14px
+}
+.card{
+    background:#fff;border-radius:11px;padding:16px;
+    box-shadow:0 5px 18px rgba(16,42,67,.09);
+    border:1px solid #e5ebf0;display:flex;flex-direction:column
+}
+.card-header{display:flex;align-items:center;gap:10px;margin-bottom:13px}
+.badge{
+    width:32px;height:32px;border-radius:50%;
+    background:#00a896;color:#fff;display:grid;place-items:center;
+    font-weight:bold;flex-shrink:0
+}
+.card h2{font-size:18px;color:#17384d}
+.field{margin-bottom:10px}
+label{
+    display:block;font-size:13px;font-weight:600;
+    margin-bottom:5px;color:#334e68
+}
+.input-row{display:flex;gap:7px}
+input,select{
+    width:100%;height:38px;border:1px solid #cbd5df;
+    border-radius:6px;background:#fff;padding:0 9px;
+    font-size:14px;outline:none
+}
+input:focus,select:focus{
+    border-color:#00a896;box-shadow:0 0 0 2px rgba(0,168,150,.10)
+}
+.unit{max-width:82px}
+button{
+    width:100%;min-height:38px;border:0;border-radius:6px;
+    background:#00a896;color:#fff;font-size:13px;
+    font-weight:700;cursor:pointer;margin-top:2px
+}
+button:hover{background:#008f80}
+.result{
+    margin-top:9px;background:#eefaf8;border:1px solid #c9eee8;
+    border-radius:6px;padding:9px;font-weight:700;color:#006b61;
+    min-height:38px;display:flex;align-items:center;font-size:13px
+}
+.error{color:#b42318;background:#fff2f0;border-color:#f4c7c2}
+.formula{margin-top:11px}
+.formula-title{
+    font-size:11px;font-weight:700;color:#66788a;
+    margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px
+}
+.formula-box{
+    background:#f5f7f9;border-left:3px solid #00a896;
+    border-radius:4px;padding:8px;font-family:"Times New Roman",serif;
+    font-size:17px;text-align:center;color:#17212b
+}
+.formula-note{margin-top:4px;font-size:11px;color:#718096;text-align:center}
+.seo-content{
+    margin-top:14px;background:#fff;border:1px solid #e5ebf0;
+    border-radius:10px;padding:14px 17px
+}
+.seo-content h2{font-size:17px;color:#17384d;margin-bottom:6px}
+.seo-content p{
+    font-size:13px;line-height:1.5;color:#52606d;margin-bottom:5px
+}
+.seo-content strong{color:#334e68}
+.footer-note{text-align:center;font-size:11px;color:#8795a1;margin-top:10px}
+
+@media(max-width:900px){
+    .hero{height:105px}
+    .calculator-grid{grid-template-columns:1fr}
+    .card{max-width:650px;width:100%;margin:auto}
+}
+</style>
+</head>
+
+<body>
+
+<header class="hero">
+    <h1>INDUCTANCE CALCULATOR</h1>
+</header>
+
+<main class="container">
+    <p class="intro">
+        Free online tool to calculate <strong>inductance, AL value and number of turns</strong> for magnetic cores.
+    </p>
+
+    <section class="calculator-grid">
+
+        <article class="card">
+            <div class="card-header">
+                <div class="badge">A</div>
+                <h2>Calculate No. of Turns</h2>
+            </div>
+
+            <div class="field">
+                <label for="indA">Inductance (L)</label>
+                <div class="input-row">
+                    <input id="indA" type="number" step="any" placeholder="Enter inductance">
+                    <select id="unitA" class="unit">
+                        <option value="nH">nH</option>
+                        <option value="uH" selected>µH</option>
+                        <option value="mH">mH</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="alA">AL Value (nH / turn²)</label>
+                <input id="alA" type="number" step="any" placeholder="Enter AL value">
+            </div>
+
+            <button onclick="calculateTurns()">Calculate No. of Turns</button>
+            <div id="resultA" class="result">Result will appear here</div>
+
+            <div class="formula">
+                <div class="formula-title">Formula</div>
+                <div class="formula-box">N = √(L / A<sub>L</sub>)</div>
+                <div class="formula-note">L and A<sub>L</sub> must use the same unit basis.</div>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="card-header">
+                <div class="badge">B</div>
+                <h2>Calculate AL Value</h2>
+            </div>
+
+            <div class="field">
+                <label for="turnsB">Measured No. of Turns (N)</label>
+                <input id="turnsB" type="number" step="any" placeholder="Enter turns">
+            </div>
+
+            <div class="field">
+                <label for="indB">Measured Inductance (L)</label>
+                <div class="input-row">
+                    <input id="indB" type="number" step="any" placeholder="Enter inductance">
+                    <select id="unitB" class="unit">
+                        <option value="nH">nH</option>
+                        <option value="uH" selected>µH</option>
+                        <option value="mH">mH</option>
+                    </select>
+                </div>
+            </div>
+
+            <button onclick="calculateAL()">Calculate AL Value</button>
+            <div id="resultB" class="result">Result will appear here</div>
+
+            <div class="formula">
+                <div class="formula-title">Formula</div>
+                <div class="formula-box">A<sub>L</sub> = L / N²</div>
+                <div class="formula-note">Result is expressed in nH / turn².</div>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="card-header">
+                <div class="badge">C</div>
+                <h2>Calculate Inductance</h2>
+            </div>
+
+            <div class="field">
+                <label for="turnsC">No. of Turns (N)</label>
+                <input id="turnsC" type="number" step="any" placeholder="Enter turns">
+            </div>
+
+            <div class="field">
+                <label for="alC">AL Value (nH / turn²)</label>
+                <input id="alC" type="number" step="any" placeholder="Enter AL value">
+            </div>
+
+            <div class="field">
+                <label for="unitC">Output Unit</label>
+                <select id="unitC">
+                    <option value="nH">nH</option>
+                    <option value="uH" selected>µH</option>
+                    <option value="mH">mH</option>
+                </select>
+            </div>
+
+            <button onclick="calculateInductance()">Calculate Inductance</button>
+            <div id="resultC" class="result">Result will appear here</div>
+
+            <div class="formula">
+                <div class="formula-title">Formula</div>
+                <div class="formula-box">L = A<sub>L</sub> × N²</div>
+                <div class="formula-note">A<sub>L</sub> is in nH / turn².</div>
+            </div>
+        </article>
+
+    </section>
+
+    <section class="seo-content">
+        <h2>Online Inductance Calculator</h2>
+        <p>
+            This free <strong>inductance calculator</strong> helps electronics engineers, designers and hobbyists
+            calculate the <strong>number of turns, AL value and inductance</strong> of a magnetic core.
+            It supports <strong>nH, µH and mH</strong> inductance units.
+        </p>
+        <p>
+            The main relationship is <strong>L = A<sub>L</sub> × N²</strong>, where L is inductance,
+            A<sub>L</sub> is the core AL value and N is the number of turns.
+        </p>
+    </section>
+
+    <div class="footer-note">Inductance Calculator by Phomar Systems</div>
+</main>
+
+<script>
+function toNanoHenry(value,unit){
+    if(unit==="nH")return value;
+    if(unit==="uH")return value*1000;
+    if(unit==="mH")return value*1000000;
+    return value;
+}
+function fromNanoHenry(value,unit){
+    if(unit==="nH")return value;
+    if(unit==="uH")return value/1000;
+    if(unit==="mH")return value/1000000;
+    return value;
+}
+function formatNumber(value){
+    if(!Number.isFinite(value))return "";
+    if(Math.abs(value)>=1000000||Math.abs(value)<0.001)return value.toExponential(5);
+    return Number(value.toFixed(6)).toString();
+}
+function showError(id,msg){
+    const el=document.getElementById(id);
+    el.textContent=msg;el.classList.add("error");
+}
+function showResult(id,msg){
+    const el=document.getElementById(id);
+    el.textContent=msg;el.classList.remove("error");
+}
+function calculateTurns(){
+    const L=parseFloat(document.getElementById("indA").value);
+    const AL=parseFloat(document.getElementById("alA").value);
+    const unit=document.getElementById("unitA").value;
+    if(L<=0||AL<=0||!Number.isFinite(L)||!Number.isFinite(AL)){
+        showError("resultA","Please enter valid positive values.");return;
+    }
+    const turns=Math.sqrt(toNanoHenry(L,unit)/AL);
+    showResult("resultA","No. of Turns = "+formatNumber(turns));
+}
+function calculateAL(){
+    const N=parseFloat(document.getElementById("turnsB").value);
+    const L=parseFloat(document.getElementById("indB").value);
+    const unit=document.getElementById("unitB").value;
+    if(N<=0||L<=0||!Number.isFinite(N)||!Number.isFinite(L)){
+        showError("resultB","Please enter valid positive values.");return;
+    }
+    const AL=toNanoHenry(L,unit)/(N*N);
+    showResult("resultB","AL Value = "+formatNumber(AL)+" nH / turn²");
+}
+function calculateInductance(){
+    const N=parseFloat(document.getElementById("turnsC").value);
+    const AL=parseFloat(document.getElementById("alC").value);
+    const unit=document.getElementById("unitC").value;
+    if(N<=0||AL<=0||!Number.isFinite(N)||!Number.isFinite(AL)){
+        showError("resultC","Please enter valid positive values.");return;
+    }
+    const result=fromNanoHenry(AL*N*N,unit);
+    showResult("resultC","Inductance = "+formatNumber(result)+" "+(unit==="uH"?"µH":unit));
+}
+</script>
+</body>
+</html>
