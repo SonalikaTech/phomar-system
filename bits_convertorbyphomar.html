@@ -20,315 +20,817 @@
 <meta name="twitter:title" content="Bits Converter Online | Phomar">
 <meta name="twitter:description" content="Convert and manipulate bits, decimal, hexadecimal and octal values online.">
 <style>
-    * { box-sizing: border-box; }
-    body {
-        margin: 0;
-        font-family: Inter, "Segoe UI", Arial, sans-serif;
-        background: #07111f;
-        color: #e8f0fa;
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f7fb;
+    color:#17212b;
+    min-height:100vh;
+}
+
+.hero{
+    min-height:72px;
+    padding:10px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+    background:#fff;
+    border-bottom:1px solid #e2e8f0;
+    box-shadow:0 3px 12px rgba(0,43,92,.08);
+}
+
+.tool-header{
+    position:relative;
+    z-index:2;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+}
+
+.tool-logo{
+    width:44px;
+    height:44px;
+    object-fit:contain;
+    flex-shrink:0;
+}
+
+.hero h1{
+    position:relative;
+    z-index:1;
+    color:#002b5c;
+    font-size:clamp(24px,4vw,34px);
+    letter-spacing:.5px;
+    font-weight:700;
+    margin:0;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:18px 18px 30px;
+}
+
+.intro{
+    text-align:center;
+    margin-bottom:16px;
+    color:#52606d;
+    font-size:14px;
+}
+
+.card{
+    background:#fff;
+    border-radius:12px;
+    padding:18px;
+    box-shadow:0 7px 22px rgba(0,43,92,.09);
+    border:1px solid #e0e8f0;
+    display:flex;
+    flex-direction:column;
+}
+
+.card-header{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:14px;
+}
+
+.badge{
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    background:#007bff;
+    color:#fff;
+    display:grid;
+    place-items:center;
+    font-weight:bold;
+    flex-shrink:0;
+    box-shadow:0 4px 10px rgba(0,123,255,.22);
+}
+
+.card h2{
+    font-size:18px;
+    color:#002b5c;
+}
+
+.bits{
+    padding:14px 10px 8px;
+    border:1px solid #e0e8f0;
+    border-radius:12px;
+    background:#fff;
+    box-shadow:0 7px 22px rgba(0,43,92,.09);
+    margin-bottom:16px;
+}
+
+.bit-row{
+    display:grid;
+    grid-template-columns:repeat(16,1fr);
+    gap:8px;
+    margin-bottom:18px;
+}
+
+.bit{
+    text-align:center;
+}
+
+.bit-number{
+    font-size:12px;
+    margin-bottom:5px;
+    color:#52606d;
+    font-weight:600;
+}
+
+.bit-button{
+    width:100%;
+    height:52px;
+    border:1px solid #cbd5df;
+    border-radius:7px;
+    background:#f8fafc;
+    color:#334e68;
+    box-shadow:0 2px 6px rgba(0,43,92,.07);
+    font-size:18px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.15s ease;
+}
+
+.bit-button:hover{
+    border-color:#007bff;
+    background:#eef6ff;
+    transform:translateY(-1px);
+}
+
+.bit-button.on{
+    background:#007bff;
+    border-color:#007bff;
+    color:#fff;
+    box-shadow:0 4px 10px rgba(0,123,255,.22);
+}
+
+.bit-button:disabled{
+    opacity:.35;
+    cursor:not-allowed;
+}
+
+.panel{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    align-items:center;
+    margin-bottom:10px;
+}
+
+.field-group{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+label{
+    font-size:12px;
+    white-space:nowrap;
+    color:#334e68;
+    font-weight:600;
+}
+
+input,select{
+    height:36px;
+    width:100%;
+    min-width:0;
+    border:1px solid #cbd5df;
+    border-radius:7px;
+    background:#fff;
+    color:#17212b;
+    padding:0 7px;
+    font-size:13px;
+    outline:none;
+}
+
+input:focus,select:focus{
+    border-color:#007bff;
+    box-shadow:0 0 0 3px rgba(0,123,255,.10);
+}
+
+.action-buttons{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:8px;
+}
+
+.btn{
+    width:100%;
+    min-height:39px;
+    border:0;
+    border-radius:7px;
+    background:#007bff;
+    color:#fff;
+    font-size:13px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.2s ease;
+}
+
+.btn:hover{
+    background:#0056b3;
+}
+
+.operations{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr 1fr;
+    gap:16px;
+    align-items:center;
+    background:#fff;
+    border:1px solid #e0e8f0;
+    border-radius:12px;
+    padding:16px;
+    box-shadow:0 7px 22px rgba(0,43,92,.09);
+}
+
+.operation-row{
+    display:flex;
+    align-items:center;
+    gap:9px;
+}
+
+.operation-row label{
+    white-space:normal;
+    line-height:1.15;
+}
+
+.checkbox{
+    width:22px;
+    height:22px;
+    accent-color:#007bff;
+    cursor:pointer;
+    flex-shrink:0;
+}
+
+.operation-row strong{
+    color:#002b5c;
+}
+
+.seo-content{
+    margin-top:16px;
+    background:#fff;
+    border:1px solid #e0e8f0;
+    border-radius:11px;
+    padding:15px 18px;
+    box-shadow:0 5px 18px rgba(0,43,92,.06);
+}
+
+.seo-content h2{
+    font-size:17px;
+    color:#002b5c;
+    margin-bottom:7px;
+}
+
+.seo-content h2:not(:first-child){
+    margin-top:16px;
+}
+
+.seo-content h3{
+    margin:12px 0 4px;
+    color:#334e68;
+    font-size:15px;
+}
+
+.seo-content p,
+.seo-content li{
+    font-size:13px;
+    line-height:1.5;
+    color:#52606d;
+}
+
+.seo-content p{margin-bottom:5px}
+
+.seo-content ol{
+    margin:6px 0 0;
+    padding-left:22px;
+}
+
+.footer-note{
+    text-align:center;
+    font-size:11px;
+    color:#8795a1;
+    margin-top:11px;
+}
+
+.capture-row{
+    display:flex;
+    justify-content:flex-end;
+    margin-top:12px;
+}
+
+.capture-btn{
+    width:auto;
+    min-width:95px;
+    min-height:34px;
+    padding:0 12px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    font-size:11px;
+    border-radius:6px;
+    flex-shrink:0;
+}
+
+.capture-btn:disabled{
+    opacity:.65;
+    cursor:wait;
+}
+
+@media(max-width:900px){
+    .hero{min-height:68px}
+    .tool-logo{width:40px;height:40px}
+    .tool-header{gap:9px}
+    .panel,.operations{grid-template-columns:1fr 1fr}
+    .bit-row{gap:5px}
+    .bit-button{height:48px}
+}
+
+@media(max-width:576px){
+    .hero{min-height:64px;padding:8px 10px}
+    .tool-logo{width:34px;height:34px}
+    .tool-header{gap:7px}
+    .hero h1{font-size:21px}
+    .container{padding:14px 12px 25px}
+    .intro{font-size:13px;line-height:1.5}
+    .bits{padding:12px 8px 5px}
+    .bit-row{grid-template-columns:repeat(8,1fr);gap:5px}
+    .bit-button{height:42px;font-size:16px}
+    .panel,.operations{grid-template-columns:1fr}
+    .field-group{gap:7px}
+}
+
+/* ===== Structured Bits Converter UI ===== */
+
+.bit-card{
+    margin-bottom:16px;
+}
+
+.bit-count{
+    margin-left:auto;
+    padding:6px 12px;
+    border-radius:18px;
+    background:#eef6ff;
+    border:1px solid #cfe4ff;
+    color:#0056b3;
+    font-size:11px;
+    font-weight:700;
+}
+
+.bit-row{
+    margin-bottom:14px;
+}
+
+.bit-toolbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding-top:12px;
+    border-top:1px solid #e6edf4;
+}
+
+.bit-legend{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    color:#52606d;
+    font-size:11px;
+    white-space:nowrap;
+}
+
+.legend-chip{
+    width:28px;
+    height:28px;
+    display:grid;
+    place-items:center;
+    border-radius:6px;
+    font-weight:700;
+    border:1px solid #d8e2ec;
+}
+
+.legend-chip.on{
+    background:#eefaf5;
+    color:#087443;
+    border-color:#b8ead3;
+}
+
+.legend-chip.off{
+    background:#f8fafc;
+    color:#718096;
+}
+
+.bit-toolbar-actions{
+    display:flex;
+    gap:7px;
+}
+
+.mini-btn{
+    width:auto;
+    min-height:34px;
+    padding:0 11px;
+    font-size:11px;
+}
+
+.value-row{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr 1fr;
+    gap:10px;
+    align-items:center;
+    margin-bottom:10px;
+}
+
+.value-row.second{
+    margin-bottom:0;
+}
+
+.value-row .field-group{
+    min-width:0;
+}
+
+.value-row .field-group label{
+    flex-shrink:0;
+}
+
+.value-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+}
+
+.value-actions.single{
+    grid-template-columns:1fr;
+}
+
+.value-actions .btn{
+    min-height:36px;
+}
+
+.operations{
+    display:grid;
+    grid-template-columns:1.25fr 1fr 30px 1fr 1.2fr 1fr;
+    gap:12px;
+    align-items:end;
+    background:#f8fafc;
+    border:1px solid #e0e8f0;
+    border-radius:10px;
+    padding:14px;
+}
+
+.operation-item{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+    min-width:0;
+}
+
+.operation-item label{
+    font-size:11px;
+}
+
+.fixed-item{
+    flex-direction:row;
+    align-items:center;
+    gap:8px;
+    padding-top:18px;
+}
+
+.checkbox{
+    width:22px;
+    height:22px;
+    accent-color:#007bff;
+    cursor:pointer;
+    flex-shrink:0;
+}
+
+.q-label{
+    align-self:center;
+    justify-self:center;
+    font-size:22px;
+    font-weight:700;
+    color:#002b5c;
+}
+
+.not-item .btn{
+    width:100%;
+    min-height:36px;
+}
+
+.shift-buttons{
+    grid-column:1 / -1;
+    display:flex;
+    justify-content:flex-end;
+    gap:8px;
+    margin-top:2px;
+}
+
+.shift-buttons .btn{
+    width:auto;
+    min-width:140px;
+    min-height:36px;
+}
+
+.capture-footer{
+    margin-top:16px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:12px;
+    background:#fff;
+    border:1px solid #e0e8f0;
+    border-radius:11px;
+    box-shadow:0 5px 18px rgba(0,43,92,.06);
+}
+
+.capture-info{
+    flex:1;
+    min-width:0;
+    padding:10px 12px;
+    border-radius:7px;
+    background:#eef6ff;
+    border:1px solid #cfe4ff;
+    color:#52606d;
+    font-size:12px;
+}
+
+.capture-info strong{
+    color:#0056b3;
+}
+
+.capture-btn{
+    width:auto;
+    min-width:105px;
+    min-height:40px;
+    padding:0 13px;
+}
+
+@media(max-width:900px){
+    .value-row{
+        grid-template-columns:1fr 1fr;
     }
 
-    .app {
-        max-width: 1400px;
-        margin: 0 auto;
-        min-height: 100vh;
-        background: linear-gradient(180deg, #0b1729 0%, #081321 100%);
+    .operations{
+        grid-template-columns:1fr 1fr;
     }
 
-    .titlebar {
-        height: 52px;
-        display: flex;
-        align-items: center;
-        padding: 0 18px;
-        background: linear-gradient(135deg, #132b47, #0d1d32);
-        color: #f4f9ff;
-        font-size: 19px;
-        font-weight: 700;
-        letter-spacing: .15px;
+    .q-label{
+        display:none;
     }
 
-    .brand {
-        color: #38bdf8;
-    }
-        border-bottom: 1px solid #284564;
-        box-shadow: 0 6px 18px rgba(0,0,0,.25);
+    .bit-toolbar{
+        flex-direction:column;
+        align-items:stretch;
     }
 
-    .bits {
-        padding: 12px 10px 4px;
-        border-bottom: 1px solid #1d334c;
+    .bit-toolbar-actions{
+        display:grid;
+        grid-template-columns:repeat(4,1fr);
     }
 
-    .bit-row {
-        display: grid;
-        grid-template-columns: repeat(16, 1fr);
-        gap: 10px;
-        margin-bottom: 25px;
+    .bit-toolbar-actions .btn{
+        width:100%;
     }
 
-    .bit {
-        text-align: center;
+    .capture-footer{
+        align-items:stretch;
+    }
+}
+
+@media(max-width:576px){
+    .value-row{
+        grid-template-columns:1fr;
     }
 
-    .bit-number {
-        font-size: 14px;
-        margin-bottom: 5px;
+    .value-actions{
+        grid-template-columns:1fr 1fr;
     }
 
-    .bit-button {
-        width: 100%;
-        height: 70px;
-        border: 1px solid #29435f;
-        border-radius: 9px;
-        background: linear-gradient(145deg, #14243a, #0d1b2d);
-        color: #dbeafe;
-        box-shadow: 0 3px 8px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.04);
-        font-size: 20px;
-        font-weight: 650;
-        cursor: pointer;
-        transition: .15s ease;
+    .operations{
+        grid-template-columns:1fr;
     }
 
-    .bit-button:hover {
-        border-color: #3b82f6;
-        background: linear-gradient(145deg, #19304c, #10243a);
-        transform: translateY(-1px);
+    .q-label{
+        display:none;
     }
 
-    .bit-button.on {
-        background: linear-gradient(145deg, #16a66a, #0d7d51);
-        border-color: #35d996;
-        color: #ecfff7;
-        font-weight: 700;
-        box-shadow: 0 0 0 1px rgba(53,217,150,.15), 0 4px 14px rgba(16,185,129,.18);
+    .shift-buttons{
+        display:grid;
+        grid-template-columns:1fr 1fr;
     }
 
-    .panel {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 140px;
-        gap: 18px;
-        padding: 8px 10px;
-        align-items: center;
+    .shift-buttons .btn{
+        min-width:0;
     }
 
-    .field-group {
-        display: flex;
-        align-items: center;
-        gap: 12px;
+    .bit-count{
+        display:none;
     }
 
-    label {
-        font-size: 14px;
-        white-space: nowrap;
-        color: #aebed2;
-        font-weight: 550;
+    .bit-toolbar-actions{
+        grid-template-columns:1fr 1fr;
     }
 
-    input, select {
-        height: 58px;
-        width: 100%;
-        border: 1px solid #2a435f;
-        border-radius: 9px;
-        background: #0d1a2b;
-        color: #edf5ff;
-        box-shadow: inset 0 1px 3px rgba(0,0,0,.28);
-        padding: 8px 12px;
-        font-size: 16px;
-        outline: none;
-        transition: .15s ease;
+    .capture-footer{
+        flex-direction:column;
     }
 
-    input:focus, select:focus {
-        border-color: #38bdf8;
-        box-shadow: 0 0 0 3px rgba(56,189,248,.12);
+    .capture-btn{
+        width:100%;
     }
+}
 
-    .wide-label {
-        white-space: normal;
-        line-height: 1.05;
-    }
-
-    .btn {
-        height: 58px;
-        border: 1px solid #2b4867;
-        background: linear-gradient(145deg, #172a43, #0f2034);
-        color: #dbeafe;
-        box-shadow: 0 3px 9px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.04);
-        font-size: 15px;
-        font-weight: 650;
-        cursor: pointer;
-        border-radius: 9px;
-        transition: .15s ease;
-    }
-
-    .btn:hover {
-        border-color: #38bdf8;
-        background: linear-gradient(145deg, #1b3552, #122943);
-        transform: translateY(-1px);
-    }
-
-    .btn:active, .bit-button:active {
-        transform: translateY(0);
-    }
-
-    .operations {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        gap: 18px;
-        padding: 8px 10px 20px;
-        align-items: center;
-    }
-
-    .operation-row {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-    }
-
-    .operation-row label {
-        min-width: 125px;
-        white-space: normal;
-    }
-
-    .checkbox {
-        width: 30px;
-        height: 30px;
-        accent-color: #38bdf8;
-        cursor: pointer;
-    }
-
-    .action-buttons {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-    }
-
-    .bottom-actions {
-        display: flex;
-        justify-content: flex-end;
-        padding: 0 10px 25px;
-    }
-
-    @media (max-width: 900px) {
-        .bit-row {
-            gap: 5px;
-        }
-        .bit-number { font-size: 14px; }
-        .bit-button { height: 50px; font-size: 20px; }
-        .panel, .operations {
-            grid-template-columns: 1fr 1fr;
-        }
-    }
-
-    @media (max-width: 600px) {
-        .titlebar { font-size: 20px; }
-        .bit-row {
-            grid-template-columns: repeat(8, 1fr);
-        }
-        .panel, .operations {
-            grid-template-columns: 1fr;
-        }
-    }
 </style>
 </head>
 
 <body>
 <div class="app">
 
-    <div class="titlebar"><span>Bits Converter <span class="brand">By Phomar</span></span></div>
+    <header class="hero">
+    <div class="tool-header">
+        <img src="logo1.png" alt="Phomar Systems Logo" class="tool-logo">
+        <h1>BITS CONVERTER</h1>
+    </div>
+</header>
 
-    <div class="bits">
+<main class="container">
+
+    <p class="intro">
+        Free online tool to convert and manipulate <strong>8-bit, 16-bit, 32-bit and 64-bit</strong>
+        decimal, hexadecimal, octal and binary values.
+    </p>
+
+    <!-- A: Bit View -->
+    <section class="card bit-card" id="captureArea">
+
+        <div class="card-header">
+            <div class="badge">A</div>
+            <h2>Bit View (MSB → LSB)</h2>
+            <span class="bit-count" id="bitCount">32 Bit</span>
+        </div>
+
         <div class="bit-row" id="highBits"></div>
         <div class="bit-row" id="lowBits"></div>
+
+        <div class="bit-toolbar">
+            <div class="bit-legend">
+                <span class="legend-chip on">1</span>
+                <span>1 = ON</span>
+                <span class="legend-chip off">0</span>
+                <span>0 = OFF</span>
+            </div>
+
+            <div class="bit-toolbar-actions">
+                <button class="btn mini-btn" onclick="setAll()">Set All</button>
+                <button class="btn mini-btn" onclick="clearAll()">Clear All</button>
+                <button class="btn mini-btn" onclick="toggleAll()">Toggle All</button>
+                <button class="btn mini-btn" onclick="reverseBits()">Reverse</button>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- B: Value Converter -->
+    <section class="card" id="converterCard">
+
+        <div class="card-header">
+            <div class="badge">B</div>
+            <h2>Value Converter</h2>
+        </div>
+
+        <div class="value-row">
+            <div class="field-group">
+                <label>DEC</label>
+                <input id="dec" type="text" value="0">
+            </div>
+
+            <div class="field-group">
+                <label>OCT</label>
+                <input id="oct" type="text" value="0">
+            </div>
+
+            <div class="field-group">
+                <label>HEX</label>
+                <input id="hex" type="text" value="0">
+            </div>
+
+            <div class="value-actions">
+                <button class="btn" onclick="clearAll()">Clr</button>
+                <button class="btn" onclick="setAll()">Set</button>
+            </div>
+        </div>
+
+        <div class="value-row second">
+            <div class="field-group">
+                <label>Data width</label>
+                <select id="width" onchange="changeWidth()">
+                    <option value="8">8 Bit</option>
+                    <option value="16">16 Bit</option>
+                    <option value="32" selected>32 Bit</option>
+                    <option value="64">64 Bit</option>
+                </select>
+            </div>
+
+            <div class="field-group">
+                <label>Real value</label>
+                <input id="real" type="number" value="0">
+            </div>
+
+            <div class="field-group">
+                <label>Approx value</label>
+                <input id="approx" type="text" value="0" readonly>
+            </div>
+
+            <div class="value-actions single">
+                <button class="btn" onclick="bitNot()">Not</button>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- C: Bit Operations -->
+    <section class="card" id="operationsCard">
+
+        <div class="card-header">
+            <div class="badge">C</div>
+            <h2>Bit Operations</h2>
+        </div>
+
+        <div class="operations">
+
+            <div class="operation-item fixed-item">
+                <input class="checkbox" id="fixed" type="checkbox">
+                <label>Fixed point<br>nQN format</label>
+            </div>
+
+            <div class="operation-item">
+                <label>Q Integer</label>
+                <select id="qN">
+                    <option>24</option>
+                    <option>16</option>
+                    <option>8</option>
+                    <option>4</option>
+                    <option>2</option>
+                </select>
+            </div>
+
+            <div class="q-label">Q</div>
+
+            <div class="operation-item">
+                <label>Q Fraction</label>
+                <select id="qM">
+                    <option>8</option>
+                    <option>16</option>
+                    <option>24</option>
+                    <option>32</option>
+                </select>
+            </div>
+
+            <div class="operation-item not-item">
+                <label>NOT</label>
+                <button class="btn" onclick="bitNot()">Not</button>
+            </div>
+
+            <div class="operation-item">
+                <label>Shift</label>
+                <select id="shift">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>4</option>
+                    <option>8</option>
+                </select>
+            </div>
+
+            <div class="shift-buttons">
+                <button class="btn" onclick="shiftLeft()">Lsh (&lt;&lt;)</button>
+                <button class="btn" onclick="shiftRight()">Rsh (&gt;&gt;)</button>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Capture -->
+    <div class="capture-footer">
+        <div class="capture-info">
+            <strong>ⓘ About:</strong>
+            This tool helps you convert and manipulate binary data with ease.
+        </div>
+
+        <button type="button" class="btn capture-btn" onclick="captureBits(this)">
+            📷 Capture
+        </button>
     </div>
 
-    <div class="panel">
-        <div class="field-group">
-            <label>Dec</label>
-            <input id="dec" type="text" value="0">
-        </div>
+    <div class="footer-note">Bits Converter by Phomar Systems</div>
 
-        <div class="field-group">
-            <label>Oct</label>
-            <input id="oct" type="text" value="0">
-        </div>
-
-        <div class="field-group">
-            <label>Hex</label>
-            <input id="hex" type="text" value="0">
-        </div>
-
-        <div class="action-buttons">
-            <button class="btn" onclick="clearAll()">Clr</button>
-            <button class="btn" onclick="setAll()">Set</button>
-        </div>
-
-        <div class="field-group">
-            <label>Data<br>width</label>
-            <select id="width" onchange="changeWidth()">
-                <option value="8">8</option>
-                <option value="16">16</option>
-                <option value="32" selected>32</option>
-                <option value="64">64</option>
-            </select>
-        </div>
-
-        <div class="field-group">
-            <label>Real<br>value</label>
-            <input id="real" type="number" value="0">
-        </div>
-
-        <div class="field-group">
-            <label>Approx<br>value</label>
-            <input id="approx" type="text" value="0" readonly>
-        </div>
-
-        <button class="btn" onclick="bitNot()">Not</button>
-    </div>
-
-    <div class="operations">
-        <div class="operation-row">
-            <input class="checkbox" id="fixed" type="checkbox">
-            <label class="wide-label">Fixed point<br>nQN format</label>
-        </div>
-
-        <div class="operation-row">
-            <select id="qN">
-                <option>24</option>
-                <option>16</option>
-                <option>8</option>
-                <option>4</option>
-                <option>2</option>
-            </select>
-            <strong style="font-size:22px;">Q</strong>
-            <select id="qM">
-                <option>8</option>
-                <option>16</option>
-                <option>24</option>
-                <option>32</option>
-            </select>
-        </div>
-
-        <div class="operation-row">
-            <label>Shift</label>
-            <select id="shift">
-                <option>1</option>
-                <option>2</option>
-                <option>4</option>
-                <option>8</option>
-            </select>
-        </div>
-
-        <div class="action-buttons">
-            <button class="btn" onclick="shiftLeft()">Lsh</button>
-            <button class="btn" onclick="shiftRight()">Rsh</button>
-        </div>
-    </div>
-
-
-
-</div>
-
+</main>
 <script>
 let value = 0n;
 let dataWidth = 32;
@@ -411,9 +913,21 @@ function signedValue() {
 function update() {
     value = unsignedValue();
 
-    document.getElementById("dec").value = signedValue().toString();
+    /*
+       Display DEC as unsigned for the selected data width.
+       Example:
+       8-bit  11111111 = 255
+       16-bit 1111111111111111 = 65535
+       32-bit 0xFFFFFFFF = 4294967295
+       64-bit 0xFFFFFFFFFFFFFFFF = 18446744073709551615
+
+       Previously signedValue() was used here, so 8-bit 255
+       appeared as -1.
+    */
+    document.getElementById("dec").value = unsignedValue().toString();
     document.getElementById("oct").value = unsignedValue().toString(8);
     document.getElementById("hex").value = "0x" + unsignedValue().toString(16).toUpperCase();
+    document.getElementById("bitCount").textContent = dataWidth + " Bit";
 
     const real = Number(document.getElementById("real").value || 0);
     document.getElementById("approx").value =
@@ -449,6 +963,25 @@ document.getElementById("hex").addEventListener("change", e => {
     value = parseInput(e.target.value, 16);
     update();
 });
+
+
+function toggleAll(){
+    value = (~value) & mask();
+    update();
+}
+
+function reverseBits(){
+    let reversed = 0n;
+
+    for(let i=0;i<dataWidth;i++){
+        if(((value >> BigInt(i)) & 1n) === 1n){
+            reversed |= 1n << BigInt(dataWidth - 1 - i);
+        }
+    }
+
+    value = reversed;
+    update();
+}
 
 function clearAll() {
     value = 0n;
@@ -492,6 +1025,133 @@ document.getElementById("fixed").addEventListener("change", update);
 
 renderBits();
 update();
+function loadCaptureImage(src){
+    return new Promise((resolve,reject)=>{
+        const img=new Image();
+        img.onload=()=>resolve(img);
+        img.onerror=reject;
+        img.src=src;
+    });
+}
+
+async function ensureHtml2Canvas(){
+    if(typeof html2canvas!=="undefined") return;
+
+    const script=document.createElement("script");
+    script.src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js";
+    document.head.appendChild(script);
+
+    await new Promise((resolve,reject)=>{
+        script.onload=resolve;
+        script.onerror=reject;
+    });
+}
+
+function sanitizeFileName(value){
+    return String(value)
+        .trim()
+        .replace(/[<>:"/\\|?*]+/g,"")
+        .replace(/\s+/g,"_")
+        .replace(/[()]/g,"");
+}
+
+async function captureBits(button){
+
+    const area=document.getElementById("captureArea");
+    if(!area) return;
+
+    const originalText=button.innerHTML;
+    button.disabled=true;
+    button.textContent="Saving...";
+
+    try{
+        await ensureHtml2Canvas();
+
+        const contentCanvas=await html2canvas(area,{
+            backgroundColor:"#ffffff",
+            scale:2,
+            useCORS:true,
+            logging:false
+        });
+
+        const headerHeight=82;
+        const sidePadding=22;
+
+        const finalCanvas=document.createElement("canvas");
+        finalCanvas.width=contentCanvas.width;
+        finalCanvas.height=contentCanvas.height+headerHeight*2;
+
+        const ctx=finalCanvas.getContext("2d");
+
+        ctx.fillStyle="#ffffff";
+        ctx.fillRect(0,0,finalCanvas.width,finalCanvas.height);
+
+        ctx.fillStyle="#ffffff";
+        ctx.fillRect(0,0,finalCanvas.width,headerHeight);
+
+        ctx.fillStyle="#007bff";
+        ctx.fillRect(0,headerHeight-2,finalCanvas.width,2);
+
+        try{
+            const logo=await loadCaptureImage("logo1.png");
+            const logoSize=48;
+            const logoX=sidePadding;
+            const logoY=(headerHeight-logoSize)/2;
+
+            ctx.drawImage(
+                logo,
+                logoX,
+                logoY,
+                logoSize,
+                logoSize
+            );
+        }catch(e){
+            console.warn("Logo could not be loaded for capture:",e);
+        }
+
+        ctx.fillStyle="#002b5c";
+        ctx.font="700 26px Arial, Helvetica, sans-serif";
+        ctx.textBaseline="middle";
+        ctx.fillText(
+            "BITS CONVERTER",
+            sidePadding+60,
+            headerHeight/2
+        );
+
+        ctx.drawImage(contentCanvas,0,headerHeight);
+
+        const footerY=headerHeight+contentCanvas.height;
+
+        ctx.fillStyle="#f4f7fb";
+        ctx.fillRect(0,footerY,finalCanvas.width,headerHeight);
+
+        ctx.fillStyle="#66788a";
+        ctx.font="12px Arial, Helvetica, sans-serif";
+        ctx.textAlign="center";
+        ctx.textBaseline="middle";
+        ctx.fillText(
+            "Phomar Systems",
+            finalCanvas.width/2,
+            footerY+headerHeight/2
+        );
+
+        const width=dataWidth;
+        const dec=unsignedValue().toString();
+
+        const link=document.createElement("a");
+        link.download="Bits_"+width+"bit_"+sanitizeFileName(dec)+".png";
+        link.href=finalCanvas.toDataURL("image/png");
+        link.click();
+
+    }catch(error){
+        alert("Unable to capture the result. Please try again.");
+        console.error(error);
+    }finally{
+        button.disabled=false;
+        button.innerHTML=originalText;
+    }
+}
+
 </script>
 
     <section class="seo-content" aria-label="About Bits Converter">
