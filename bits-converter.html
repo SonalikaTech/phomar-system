@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bits Converter Online - Decimal, Hex, Octal & Bit Manipulation | Phomar</title>
+<meta name="description" content="Free online Bits Converter for decimal, hexadecimal, octal and binary bit manipulation. Toggle individual bits, shift bits and work with 8-bit, 16-bit, 32-bit and 64-bit values.">
+<meta name="keywords" content="bits converter, bit converter online, decimal to hex converter, hex to decimal converter, binary bit manipulation, bit manipulation tool, 32 bit converter, embedded developer tools, firmware tools">
+<meta name="author" content="Phomar">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://phomar.com/bits-converter.html">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Bits Converter Online | Phomar">
+<meta property="og:description" content="Free online tool for decimal, hexadecimal, octal and bit manipulation.">
+<meta property="og:url" content="https://phomar.com/bits-converter.html">
+<meta property="og:site_name" content="Phomar">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Bits Converter Online | Phomar">
+<meta name="twitter:description" content="Convert and manipulate bits, decimal, hexadecimal and octal values online.">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f7fb;
+    color:#17212b;
+    min-height:100vh;
+}
+
+.hero{
+    min-height:72px;
+    padding:10px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+    background:#fff;
+    border-bottom:1px solid #e2e8f0;
+    box-shadow:0 3px 12px rgba(0,43,92,.08);
+}
+
+.tool-header{
+    position:relative;
+    z-index:2;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+}
+
+.tool-logo{
+    width:44px;
+    height:44px;
+    object-fit:contain;
+    flex-shrink:0;
+}
+
+.hero h1{
+    position:relative;
+    z-index:1;
+    color:#002b5c;
+    font-size:clamp(24px,4vw,34px);
+    letter-spacing:.5px;
+    font-weight:700;
+    margin:0;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:18px 18px 30px;
+}
+
+.intro{
+    text-align:center;
+    margin-bottom:16px;
+    color:#52606d;
+    font-size:14px;
+}
+
+.card{
+    background:#fff;
+    border-radius:12px;
+    padding:18px;
+    box-shadow:0 7px 22px rgba(0,43,92,.09);
+    border:1px solid #e0e8f0;
+    display:flex;
+    flex-direction:column;
+}
+
+.card-header{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:14px;
+}
+
+.badge{
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    background:#007bff;
+    color:#fff;
+    display:grid;
+    place-items:center;
+    font-weight:bold;
+    flex-shrink:0;
+    box-shadow:0 4px 10px rgba(0,123,255,.22);
+}
+
+.card h2{
+    font-size:18px;
+    color:#002b5c;
+}
+
+.bits{
+    padding:14px 10px 8px;
+    border:1px solid #e0e8f0;
+    border-radius:12px;
+    background:#fff;
+    box-shadow:0 7px 22px rgba(0,43,92,.09);
+    margin-bottom:16px;
+}
+
+.bit-row{
+    display:grid;
+    grid-template-columns:repeat(16,1fr);
+    gap:8px;
+    margin-bottom:18px;
+}
+
+.bit{
+    text-align:center;
+}
+
+.bit-number{
+    font-size:12px;
+    margin-bottom:5px;
+    color:#52606d;
+    font-weight:600;
+}
+
+.bit-button{
+    width:100%;
+    height:52px;
+    border:1px solid #cbd5df;
+    border-radius:7px;
+    background:#f8fafc;
+    color:#334e68;
+    box-shadow:0 2px 6px rgba(0,43,92,.07);
+    font-size:18px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.15s ease;
+}
+
+.bit-button:hover{
+    border-color:#007bff;
+    background:#eef6ff;
+    transform:translateY(-1px);
+}
+
+.bit-button.on{
+    background:#007bff;
+    border-color:#007bff;
+    color:#fff;
+    box-shadow:0 4px 10px rgba(0,123,255,.22);
+}
+
+.bit-button:disabled{
+    opacity:.35;
+    cursor:not-allowed;
+}
+
+.panel{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    align-items:center;
+    margin-bottom:10px;
+}
+
+.field-group{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+label{
+    font-size:12px;
+    white-space:nowrap;
+    color:#334e68;
+    font-weight:600;
+}
+
+input,select{
+    height:36px;
+    width:100%;
+    min-width:0;
+    border:1px solid #cbd5df;
+    border-radius:7px;
+    background:#fff;
+    color:#17212b;
+    padding:0 7px;
+    font-size:13px;
+    outline:none;
+}
+
+input:focus,select:focus{
+    border-color:#007bff;
+    box-shadow:0 0 0 3px rgba(0,123,255,.10);
+}
+
+.action-buttons{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:8px;
+}
+
+.btn{
+    width:100%;
+    min-height:39px;
+    border:0;
+    border-radius:7px;
+    background:#007bff;
+    color:#fff;
+    font-size:13px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.2s ease;
+}
+
+.btn:hover{
+    background:#0056b3;
+}
+
+.operations{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr 1fr;
+    gap:16px;
+    align-items:center;
+    background:#fff;
+    border:1px solid #e0e8f0;
+    border-radius:12px;
+    padding:16px;
+    box-shadow:0 7px 22px rgba(0,43,92,.09);
+}
+
+.operation-row{
+    display:flex;
+    align-items:center;
+    gap:9px;
+}
+
+.operation-row label{
+    white-space:normal;
+    line-height:1.15;
+}
+
+.checkbox{
+    width:22px;
+    height:22px;
+    accent-color:#007bff;
+    cursor:pointer;
+    flex-shrink:0;
+}
+
+.operation-row strong{
+    color:#002b5c;
+}
+
+.seo-content{
+    margin-top:16px;
+    background:#fff;
+    border:1px solid #e0e8f0;
+    border-radius:11px;
+    padding:15px 18px;
+    box-shadow:0 5px 18px rgba(0,43,92,.06);
+}
+
+.seo-content h2{
+    font-size:17px;
+    color:#002b5c;
+    margin-bottom:7px;
+}
+
+.seo-content h2:not(:first-child){
+    margin-top:16px;
+}
+
+.seo-content h3{
+    margin:12px 0 4px;
+    color:#334e68;
+    font-size:15px;
+}
+
+.seo-content p,
+.seo-content li{
+    font-size:13px;
+    line-height:1.5;
+    color:#52606d;
+}
+
+.seo-content p{margin-bottom:5px}
+
+.seo-content ol{
+    margin:6px 0 0;
+    padding-left:22px;
+}
+
+.footer-note{
+    text-align:center;
+    font-size:11px;
+    color:#8795a1;
+    margin-top:11px;
+}
+
+.capture-row{
+    display:flex;
+    justify-content:flex-end;
+    margin-top:12px;
+}
+
+.capture-btn{
+    width:auto;
+    min-width:95px;
+    min-height:34px;
+    padding:0 12px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    font-size:11px;
+    border-radius:6px;
+    flex-shrink:0;
+}
+
+.capture-btn:disabled{
+    opacity:.65;
+    cursor:wait;
+}
+
+@media(max-width:900px){
+    .hero{min-height:68px}
+    .tool-logo{width:40px;height:40px}
+    .tool-header{gap:9px}
+    .panel,.operations{grid-template-columns:1fr 1fr}
+    .bit-row{gap:5px}
+    .bit-button{height:48px}
+}
+
+@media(max-width:576px){
+    .hero{min-height:64px;padding:8px 10px}
+    .tool-logo{width:34px;height:34px}
+    .tool-header{gap:7px}
+    .hero h1{font-size:21px}
+    .container{padding:14px 12px 25px}
+    .intro{font-size:13px;line-height:1.5}
+    .bits{padding:12px 8px 5px}
+    .bit-row{grid-template-columns:repeat(8,1fr);gap:5px}
+    .bit-button{height:42px;font-size:16px}
+    .panel,.operations{grid-template-columns:1fr}
+    .field-group{gap:7px}
+}
+
+/* ===== Structured Bits Converter UI ===== */
+
+.bit-card{
+    margin-bottom:16px;
+}
+
+.bit-count{
+    margin-left:auto;
+    padding:6px 12px;
+    border-radius:18px;
+    background:#eef6ff;
+    border:1px solid #cfe4ff;
+    color:#0056b3;
+    font-size:11px;
+    font-weight:700;
+}
+
+.bit-row{
+    margin-bottom:14px;
+}
+
+.bit-toolbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding-top:12px;
+    border-top:1px solid #e6edf4;
+}
+
+.bit-legend{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    color:#52606d;
+    font-size:11px;
+    white-space:nowrap;
+}
+
+.legend-chip{
+    width:28px;
+    height:28px;
+    display:grid;
+    place-items:center;
+    border-radius:6px;
+    font-weight:700;
+    border:1px solid #d8e2ec;
+}
+
+.legend-chip.on{
+    background:#eefaf5;
+    color:#087443;
+    border-color:#b8ead3;
+}
+
+.legend-chip.off{
+    background:#f8fafc;
+    color:#718096;
+}
+
+.bit-toolbar-actions{
+    display:flex;
+    gap:7px;
+}
+
+.mini-btn{
+    width:auto;
+    min-height:34px;
+    padding:0 11px;
+    font-size:11px;
+}
+
+.value-row{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr 1fr;
+    gap:10px;
+    align-items:center;
+    margin-bottom:10px;
+}
+
+.value-row.second{
+    margin-bottom:0;
+}
+
+.value-row .field-group{
+    min-width:0;
+}
+
+.value-row .field-group label{
+    flex-shrink:0;
+}
+
+.value-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+}
+
+.value-actions.single{
+    grid-template-columns:1fr;
+}
+
+.value-actions .btn{
+    min-height:36px;
+}
+
+.operations{
+    display:grid;
+    grid-template-columns:1.25fr 1fr 30px 1fr 1.2fr 1fr;
+    gap:12px;
+    align-items:end;
+    background:#f8fafc;
+    border:1px solid #e0e8f0;
+    border-radius:10px;
+    padding:14px;
+}
+
+.operation-item{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+    min-width:0;
+}
+
+.operation-item label{
+    font-size:11px;
+}
+
+.fixed-item{
+    flex-direction:row;
+    align-items:center;
+    gap:8px;
+    padding-top:18px;
+}
+
+.checkbox{
+    width:22px;
+    height:22px;
+    accent-color:#007bff;
+    cursor:pointer;
+    flex-shrink:0;
+}
+
+.q-label{
+    align-self:center;
+    justify-self:center;
+    font-size:22px;
+    font-weight:700;
+    color:#002b5c;
+}
+
+.not-item .btn{
+    width:100%;
+    min-height:36px;
+}
+
+.shift-buttons{
+    grid-column:1 / -1;
+    display:flex;
+    justify-content:flex-end;
+    gap:8px;
+    margin-top:2px;
+}
+
+.shift-buttons .btn{
+    width:auto;
+    min-width:140px;
+    min-height:36px;
+}
+
+.capture-footer{
+    margin-top:16px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:12px;
+    background:#fff;
+    border:1px solid #e0e8f0;
+    border-radius:11px;
+    box-shadow:0 5px 18px rgba(0,43,92,.06);
+}
+
+.capture-info{
+    flex:1;
+    min-width:0;
+    padding:10px 12px;
+    border-radius:7px;
+    background:#eef6ff;
+    border:1px solid #cfe4ff;
+    color:#52606d;
+    font-size:12px;
+}
+
+.capture-info strong{
+    color:#0056b3;
+}
+
+.capture-btn{
+    width:auto;
+    min-width:105px;
+    min-height:40px;
+    padding:0 13px;
+}
+
+@media(max-width:900px){
+    .value-row{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .operations{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .q-label{
+        display:none;
+    }
+
+    .bit-toolbar{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .bit-toolbar-actions{
+        display:grid;
+        grid-template-columns:repeat(4,1fr);
+    }
+
+    .bit-toolbar-actions .btn{
+        width:100%;
+    }
+
+    .capture-footer{
+        align-items:stretch;
+    }
+}
+
+@media(max-width:576px){
+    .value-row{
+        grid-template-columns:1fr;
+    }
+
+    .value-actions{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .operations{
+        grid-template-columns:1fr;
+    }
+
+    .q-label{
+        display:none;
+    }
+
+    .shift-buttons{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+    }
+
+    .shift-buttons .btn{
+        min-width:0;
+    }
+
+    .bit-count{
+        display:none;
+    }
+
+    .bit-toolbar-actions{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .capture-footer{
+        flex-direction:column;
+    }
+
+    .capture-btn{
+        width:100%;
+    }
+}
+
+</style>
+</head>
+
+<body>
+<div class="app">
+
+    <header class="hero">
+    <div class="tool-header">
+        <img src="logo1.png" alt="Phomar Systems Logo" class="tool-logo">
+        <h1>BITS CONVERTER</h1>
+    </div>
+</header>
+
+<main class="container">
+
+    <p class="intro">
+        Free online tool to convert and manipulate <strong>8-bit, 16-bit, 32-bit and 64-bit</strong>
+        decimal, hexadecimal, octal and binary values.
+    </p>
+
+    <!-- A: Bit View -->
+    <section class="card bit-card" id="captureArea">
+
+        <div class="card-header">
+            <div class="badge">A</div>
+            <h2>Bit View (MSB → LSB)</h2>
+            <span class="bit-count" id="bitCount">32 Bit</span>
+        </div>
+
+        <div class="bit-row" id="highBits"></div>
+        <div class="bit-row" id="lowBits"></div>
+
+        <div class="bit-toolbar">
+            <div class="bit-legend">
+                <span class="legend-chip on">1</span>
+                <span>1 = ON</span>
+                <span class="legend-chip off">0</span>
+                <span>0 = OFF</span>
+            </div>
+
+            <div class="bit-toolbar-actions">
+                <button class="btn mini-btn" onclick="setAll()">Set All</button>
+                <button class="btn mini-btn" onclick="clearAll()">Clear All</button>
+                <button class="btn mini-btn" onclick="toggleAll()">Toggle All</button>
+                <button class="btn mini-btn" onclick="reverseBits()">Reverse</button>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- B: Value Converter -->
+    <section class="card" id="converterCard">
+
+        <div class="card-header">
+            <div class="badge">B</div>
+            <h2>Value Converter</h2>
+        </div>
+
+        <div class="value-row">
+            <div class="field-group">
+                <label>DEC</label>
+                <input id="dec" type="text" value="0">
+            </div>
+
+            <div class="field-group">
+                <label>OCT</label>
+                <input id="oct" type="text" value="0">
+            </div>
+
+            <div class="field-group">
+                <label>HEX</label>
+                <input id="hex" type="text" value="0">
+            </div>
+
+            <div class="value-actions">
+                <button class="btn" onclick="clearAll()">Clr</button>
+                <button class="btn" onclick="setAll()">Set</button>
+            </div>
+        </div>
+
+        <div class="value-row second">
+            <div class="field-group">
+                <label>Data width</label>
+                <select id="width" onchange="changeWidth()">
+                    <option value="8">8 Bit</option>
+                    <option value="16">16 Bit</option>
+                    <option value="32" selected>32 Bit</option>
+                    <option value="64">64 Bit</option>
+                </select>
+            </div>
+
+            <div class="field-group">
+                <label>Real value</label>
+                <input id="real" type="number" value="0">
+            </div>
+
+            <div class="field-group">
+                <label>Approx value</label>
+                <input id="approx" type="text" value="0" readonly>
+            </div>
+
+            <div class="value-actions single">
+                <button class="btn" onclick="bitNot()">Not</button>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- C: Bit Operations -->
+    <section class="card" id="operationsCard">
+
+        <div class="card-header">
+            <div class="badge">C</div>
+            <h2>Bit Operations</h2>
+        </div>
+
+        <div class="operations">
+
+            <div class="operation-item fixed-item">
+                <input class="checkbox" id="fixed" type="checkbox">
+                <label>Fixed point<br>nQN format</label>
+            </div>
+
+            <div class="operation-item">
+                <label>Q Integer</label>
+                <select id="qN">
+                    <option>24</option>
+                    <option>16</option>
+                    <option>8</option>
+                    <option>4</option>
+                    <option>2</option>
+                </select>
+            </div>
+
+            <div class="q-label">Q</div>
+
+            <div class="operation-item">
+                <label>Q Fraction</label>
+                <select id="qM">
+                    <option>8</option>
+                    <option>16</option>
+                    <option>24</option>
+                    <option>32</option>
+                </select>
+            </div>
+
+            <div class="operation-item not-item">
+                <label>NOT</label>
+                <button class="btn" onclick="bitNot()">Not</button>
+            </div>
+
+            <div class="operation-item">
+                <label>Shift</label>
+                <select id="shift">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>4</option>
+                    <option>8</option>
+                </select>
+            </div>
+
+            <div class="shift-buttons">
+                <button class="btn" onclick="shiftLeft()">Lsh (&lt;&lt;)</button>
+                <button class="btn" onclick="shiftRight()">Rsh (&gt;&gt;)</button>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Capture -->
+    <div class="capture-footer">
+        <div class="capture-info">
+            <strong>ⓘ About:</strong>
+            This tool helps you convert and manipulate binary data with ease.
+        </div>
+
+        <button type="button" class="btn capture-btn" onclick="captureBits(this)">
+            📷 Capture
+        </button>
+    </div>
+
+    <div class="footer-note">Bits Converter by Phomar Systems</div>
+
+</main>
+<script>
+let value = 0n;
+let dataWidth = 32;
+
+function mask() {
+    return (1n << BigInt(dataWidth)) - 1n;
+}
+
+function renderBits() {
+    const high = document.getElementById("highBits");
+    const low = document.getElementById("lowBits");
+    high.innerHTML = "";
+    low.innerHTML = "";
+
+    for (let bit = 31; bit >= 16; bit--) {
+        if (bit < dataWidth) addBit(high, bit);
+        else addDisabledBit(high, bit);
+    }
+
+    for (let bit = 15; bit >= 0; bit--) {
+        if (bit < dataWidth) addBit(low, bit);
+        else addDisabledBit(low, bit);
+    }
+}
+
+function addBit(parent, bit) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "bit";
+
+    const number = document.createElement("div");
+    number.className = "bit-number";
+    number.textContent = bit;
+
+    const button = document.createElement("button");
+    button.className = "bit-button";
+    const state = ((value >> BigInt(bit)) & 1n) === 1n;
+    button.textContent = state ? "1" : "0";
+
+    if (state) button.classList.add("on");
+
+    button.onclick = () => {
+        value ^= (1n << BigInt(bit));
+        update();
+    };
+
+    wrapper.appendChild(number);
+    wrapper.appendChild(button);
+    parent.appendChild(wrapper);
+}
+
+function addDisabledBit(parent, bit) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "bit";
+    wrapper.style.opacity = ".35";
+
+    const number = document.createElement("div");
+    number.className = "bit-number";
+    number.textContent = bit;
+
+    const button = document.createElement("button");
+    button.className = "bit-button";
+    button.textContent = "0";
+    button.disabled = true;
+
+    wrapper.appendChild(number);
+    wrapper.appendChild(button);
+    parent.appendChild(wrapper);
+}
+
+function unsignedValue() {
+    return value & mask();
+}
+
+function signedValue() {
+    const v = unsignedValue();
+    const sign = 1n << BigInt(dataWidth - 1);
+    return (v & sign) ? v - (1n << BigInt(dataWidth)) : v;
+}
+
+function update() {
+    value = unsignedValue();
+
+    /*
+       Display DEC as unsigned for the selected data width.
+       Example:
+       8-bit  11111111 = 255
+       16-bit 1111111111111111 = 65535
+       32-bit 0xFFFFFFFF = 4294967295
+       64-bit 0xFFFFFFFFFFFFFFFF = 18446744073709551615
+
+       Previously signedValue() was used here, so 8-bit 255
+       appeared as -1.
+    */
+    document.getElementById("dec").value = unsignedValue().toString();
+    document.getElementById("oct").value = unsignedValue().toString(8);
+    document.getElementById("hex").value = "0x" + unsignedValue().toString(16).toUpperCase();
+    document.getElementById("bitCount").textContent = dataWidth + " Bit";
+
+    const real = Number(document.getElementById("real").value || 0);
+    document.getElementById("approx").value =
+        document.getElementById("fixed").checked ? calculateQ(real) : real;
+
+    renderBits();
+}
+
+function parseInput(input, base) {
+    try {
+        let s = input.trim();
+        if (base === 16) s = s.replace(/^0x/i, "");
+        if (!s) return 0n;
+        return BigInt(parseInt(s, base));
+    } catch {
+        return 0n;
+    }
+}
+
+document.getElementById("dec").addEventListener("change", e => {
+    try {
+        value = BigInt(e.target.value);
+        update();
+    } catch {}
+});
+
+document.getElementById("oct").addEventListener("change", e => {
+    value = parseInput(e.target.value, 8);
+    update();
+});
+
+document.getElementById("hex").addEventListener("change", e => {
+    value = parseInput(e.target.value, 16);
+    update();
+});
+
+
+function toggleAll(){
+    value = (~value) & mask();
+    update();
+}
+
+function reverseBits(){
+    let reversed = 0n;
+
+    for(let i=0;i<dataWidth;i++){
+        if(((value >> BigInt(i)) & 1n) === 1n){
+            reversed |= 1n << BigInt(dataWidth - 1 - i);
+        }
+    }
+
+    value = reversed;
+    update();
+}
+
+function clearAll() {
+    value = 0n;
+    update();
+}
+
+function setAll() {
+    value = mask();
+    update();
+}
+
+function bitNot() {
+    value = (~value) & mask();
+    update();
+}
+
+function shiftLeft() {
+    const s = BigInt(document.getElementById("shift").value);
+    value = (value << s) & mask();
+    update();
+}
+
+function shiftRight() {
+    const s = BigInt(document.getElementById("shift").value);
+    value = value >> s;
+    update();
+}
+
+function changeWidth() {
+    dataWidth = Number(document.getElementById("width").value);
+    value &= mask();
+    update();
+}
+
+function calculateQ(real) {
+    const q = Number(document.getElementById("qM").value);
+    return real / Math.pow(2, q);
+}
+
+document.getElementById("fixed").addEventListener("change", update);
+
+renderBits();
+update();
+function loadCaptureImage(src){
+    return new Promise((resolve,reject)=>{
+        const img=new Image();
+        img.onload=()=>resolve(img);
+        img.onerror=reject;
+        img.src=src;
+    });
+}
+
+async function ensureHtml2Canvas(){
+    if(typeof html2canvas!=="undefined") return;
+
+    const script=document.createElement("script");
+    script.src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js";
+    document.head.appendChild(script);
+
+    await new Promise((resolve,reject)=>{
+        script.onload=resolve;
+        script.onerror=reject;
+    });
+}
+
+function sanitizeFileName(value){
+    return String(value)
+        .trim()
+        .replace(/[<>:"/\\|?*]+/g,"")
+        .replace(/\s+/g,"_")
+        .replace(/[()]/g,"");
+}
+
+async function captureBits(button){
+
+    const area=document.getElementById("captureArea");
+    if(!area) return;
+
+    const originalText=button.innerHTML;
+    button.disabled=true;
+    button.textContent="Saving...";
+
+    try{
+        await ensureHtml2Canvas();
+
+        const contentCanvas=await html2canvas(area,{
+            backgroundColor:"#ffffff",
+            scale:2,
+            useCORS:true,
+            logging:false
+        });
+
+        const headerHeight=82;
+        const sidePadding=22;
+
+        const finalCanvas=document.createElement("canvas");
+        finalCanvas.width=contentCanvas.width;
+        finalCanvas.height=contentCanvas.height+headerHeight*2;
+
+        const ctx=finalCanvas.getContext("2d");
+
+        ctx.fillStyle="#ffffff";
+        ctx.fillRect(0,0,finalCanvas.width,finalCanvas.height);
+
+        ctx.fillStyle="#ffffff";
+        ctx.fillRect(0,0,finalCanvas.width,headerHeight);
+
+        ctx.fillStyle="#007bff";
+        ctx.fillRect(0,headerHeight-2,finalCanvas.width,2);
+
+        try{
+            const logo=await loadCaptureImage("logo1.png");
+            const logoSize=48;
+            const logoX=sidePadding;
+            const logoY=(headerHeight-logoSize)/2;
+
+            ctx.drawImage(
+                logo,
+                logoX,
+                logoY,
+                logoSize,
+                logoSize
+            );
+        }catch(e){
+            console.warn("Logo could not be loaded for capture:",e);
+        }
+
+        ctx.fillStyle="#002b5c";
+        ctx.font="700 26px Arial, Helvetica, sans-serif";
+        ctx.textBaseline="middle";
+        ctx.fillText(
+            "BITS CONVERTER",
+            sidePadding+60,
+            headerHeight/2
+        );
+
+        ctx.drawImage(contentCanvas,0,headerHeight);
+
+        const footerY=headerHeight+contentCanvas.height;
+
+        ctx.fillStyle="#f4f7fb";
+        ctx.fillRect(0,footerY,finalCanvas.width,headerHeight);
+
+        ctx.fillStyle="#66788a";
+        ctx.font="12px Arial, Helvetica, sans-serif";
+        ctx.textAlign="center";
+        ctx.textBaseline="middle";
+        ctx.fillText(
+            "Phomar Systems",
+            finalCanvas.width/2,
+            footerY+headerHeight/2
+        );
+
+        const width=dataWidth;
+        const dec=unsignedValue().toString();
+
+        const link=document.createElement("a");
+        link.download="Bits_"+width+"bit_"+sanitizeFileName(dec)+".png";
+        link.href=finalCanvas.toDataURL("image/png");
+        link.click();
+
+    }catch(error){
+        alert("Unable to capture the result. Please try again.");
+        console.error(error);
+    }finally{
+        button.disabled=false;
+        button.innerHTML=originalText;
+    }
+}
+
+</script>
+
+    <section class="seo-content" aria-label="About Bits Converter">
+        <h2>Bits Converter Online</h2>
+        <p>
+            Phomar Bits Converter is a free online tool for embedded developers and
+            firmware engineers to convert and manipulate numerical values at bit level.
+            Use it to view individual bits and work with decimal, hexadecimal and octal values.
+        </p>
+
+        <h2>Bit Manipulation Tool</h2>
+        <p>
+            The tool supports 8-bit, 16-bit, 32-bit and 64-bit data widths. You can toggle
+            individual bits, set or clear values, perform left and right bit shifts,
+            use bitwise NOT, and work with fixed-point Q formats.
+        </p>
+
+        <h2>How to Use the Bits Converter</h2>
+        <ol>
+            <li>Click any bit to toggle it between 0 and 1.</li>
+            <li>Enter a decimal, octal or hexadecimal value to update the bit view.</li>
+            <li>Select the required data width for your calculation.</li>
+            <li>Use the shift and fixed-point options when required.</li>
+        </ol>
+
+        <h2>Frequently Asked Questions</h2>
+        <h3>Can I convert decimal to hexadecimal?</h3>
+        <p>Yes. Enter a decimal value and the corresponding hexadecimal and octal values are updated automatically.</p>
+
+        <h3>Which bit widths are supported?</h3>
+        <p>The Bits Converter supports 8-bit, 16-bit, 32-bit and 64-bit values.</p>
+
+        <h3>Who can use this tool?</h3>
+        <p>
+            It is useful for embedded firmware developers, programmers, electronics engineers,
+            and anyone working with binary and bit-level data.
+        </p>
+    </section>
+
+    <style>
+        .seo-content {
+            margin: 18px 10px 28px;
+            padding: 18px 20px;
+            border: 1px solid #1d3a58;
+            border-radius: 10px;
+            background: rgba(13, 29, 48, .72);
+            color: #aebed2;
+            line-height: 1.55;
+            font-size: 14px;
+        }
+        .seo-content h2 {
+            margin: 0 0 7px;
+            color: #e8f2ff;
+            font-size: 18px;
+        }
+        .seo-content h2:not(:first-child) {
+            margin-top: 18px;
+        }
+        .seo-content h3 {
+            margin: 12px 0 4px;
+            color: #d9e8f8;
+            font-size: 15px;
+        }
+        .seo-content p {
+            margin: 0 0 7px;
+        }
+        .seo-content ol {
+            margin: 6px 0 0;
+            padding-left: 22px;
+        }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Bits Converter Online",
+      "alternateName": "Phomar Bits Converter",
+      "url": "https://phomar.com/bits-converter.html",
+      "description": "Free online tool for decimal, hexadecimal, octal and bit-level manipulation.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "author": {
+        "@type": "Organization",
+        "name": "Phomar",
+        "url": "https://phomar.com"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+
+</body>
+</html>
